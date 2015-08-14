@@ -20,22 +20,25 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        IntentFilter intentFilter2 = new IntentFilter("com.test.training");
-
-        MyReceiver2 myReceiver2 = new MyReceiver2();
-        this.registerReceiver(myReceiver2, intentFilter2);
+//        IntentFilter intentFilter2 = new IntentFilter("com.test.training");
+//        MyReceiver2 myReceiver2 = new MyReceiver2();
+        this.registerReceiver(new MyReceiver2(), new IntentFilter("com.test.training"));
     }
-//    public void br(View view) {
+
+    // dont use this button click as we are getting sticky intent from other app and using it
+    // for this MyReceiver2  BR
+    public void br(View view) {
 //        Intent intent = new Intent();
 //        intent.setAction("com.test.training");
 //        intent.putExtra("int", 5);
+//        sendBroadcast(intent);
 //        sendStickyBroadcast(intent);
-//    }
+    }
 
     class MyReceiver2 extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            int t = intent.getIntExtra("int",0);
+            int t = intent.getIntExtra("int", 0);
             Toast.makeText(MainActivity.this, "CHANGED level: " + t, Toast.LENGTH_SHORT).show();
 //            Log.d("training", "changed level: " + t);
         }
